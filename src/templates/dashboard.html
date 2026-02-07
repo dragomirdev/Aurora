@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aurora – Audit Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="app-header">
+    <h1 class="app-title">Aurora</h1>
+    <p class="app-subtitle">Audit Dashboard – ISO 9001, ISO 42001, ISO 23894, ISO 38507, ISO 22989</p>
+</header>
+
+<div class="user-bar">
+    <div class="user-info">
+        Logged in as <span class="username">{{ username }}</span>
+    </div>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+
+
+
+<div class="dashboard">
+
+    <div class="card">
+        <h2>ISO 9001</h2>
+        <p><strong>Total questions:</strong> {{ iso9001.total }}</p>
+        <p class="green"><strong>Completed:</strong> {{ iso9001.completed }}</p>
+        <p class="red"><strong>Open:</strong> {{ iso9001.open }}</p>
+
+        <div class="progress">
+            <div class="progress-bar" style="width: {{ iso9001.percent }}%">
+                {{ iso9001.percent }}%
+            </div>
+        </div>
+
+        <a href="/iso9001" class="card-link">Open ISO 9001 Checklist</a>
+    </div>
+
+    <div class="card">
+        <h2>ISO 42001</h2>
+        <p><strong>Total questions:</strong> {{ iso42001.total }}</p>
+        <p class="green"><strong>Completed:</strong> {{ iso42001.completed }}</p>
+        <p class="red"><strong>Open:</strong> {{ iso42001.open }}</p>
+
+        <div class="progress">
+            <div class="progress-bar" style="width: {{ iso42001.percent }}%">
+                {{ iso42001.percent }}%
+            </div>
+        </div>
+
+        <a href="/iso42001" class="card-link">Open ISO 42001 Checklist</a>
+    </div>
+
+    <div class="card">
+        <h2>ISO 23894</h2>
+        <p><strong>Total questions:</strong> {{ iso23894.total }}</p>
+        <p class="green"><strong>Completed:</strong> {{ iso23894.completed }}</p>
+        <p class="red"><strong>Open:</strong> {{ iso23894.open }}</p>
+
+        <div class="progress">
+            <div class="progress-bar" style="width: {{ iso23894.percent }}%">
+                {{ iso23894.percent }}%
+            </div>
+        </div>
+
+        <a href="/iso23894" class="card-link">Open ISO 23894 Checklist</a>
+    </div>
+
+    <div class="card">
+        <h2>ISO 38507</h2>
+        <p><strong>Total questions:</strong> {{ iso38507.total }}</p>
+        <p class="green"><strong>Completed:</strong> {{ iso38507.completed }}</p>
+        <p class="red"><strong>Open:</strong> {{ iso38507.open }}</p>
+
+        <div class="progress">
+            <div class="progress-bar" style="width: {{ iso38507.percent }}%">
+                {{ iso38507.percent }}%
+            </div>
+        </div>
+
+        <a href="/iso38507" class="card-link">Open ISO 38507 Checklist</a>
+    </div>
+
+    <div class="card">
+        <h2>ISO 22989</h2>
+        <p><strong>Total questions:</strong> {{ iso22989.total }}</p>
+        <p class="green"><strong>Completed:</strong> {{ iso22989.completed }}</p>
+        <p class="red"><strong>Open:</strong> {{ iso22989.open }}</p>
+
+        <div class="progress">
+            <div class="progress-bar" style="width: {{ iso22989.percent }}%">
+                {{ iso22989.percent }}%
+            </div>
+        </div>
+
+        <a href="/iso22989" class="card-link">Open ISO 22989 Checklist</a>
+    </div>
+
+</div>
+
+</body>
+</html>
