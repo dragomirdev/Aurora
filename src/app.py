@@ -540,6 +540,45 @@ ISO_22989_MENU = {
     ]
 }
 
+ISO_42006_MENU = {
+
+    "4.1 System scope and objectives": [
+        "AI system scope for compliance documented?",
+        "Objectives aligned to organizational AI policies?",
+        "Stakeholders and intended users identified?"
+    ],
+
+    "4.2 Data and model documentation": [
+        "Training and validation datasets documented?",
+        "Model design and assumptions recorded?",
+        "Evaluation results and limitations documented?"
+    ],
+
+    "4.3 Risk and impact assessment": [
+        "Risk assessment performed for AI use cases?",
+        "Impact on stakeholders evaluated?",
+        "Mitigations defined for identified risks?"
+    ],
+
+    "4.4 Human oversight and controls": [
+        "Human oversight responsibilities assigned?",
+        "Override and escalation processes defined?",
+        "User guidance and safeguards provided?"
+    ],
+
+    "4.5 Transparency and communication": [
+        "Transparency requirements communicated to users?",
+        "Explainability approach documented where required?",
+        "Disclosures about AI use provided?"
+    ],
+
+    "4.6 Monitoring and improvement": [
+        "Monitoring plan for performance and drift defined?",
+        "Incident logging and response procedures established?",
+        "Continuous improvement actions tracked?"
+    ]
+}
+
 def get_state():
     return session.get("state", {})
 
@@ -607,6 +646,41 @@ def iso22989():
         menu=ISO_22989_MENU,
         state=state
     )
+
+@app.route("/iso42006")
+def iso42006():
+    state = session.get("state_42006", {})
+    return render_template(
+        "iso42006.html",
+        menu=ISO_42006_MENU,
+        state=state
+    )
+
+@app.route("/toggle42006", methods=["POST"])
+def toggle42006():
+    question = request.form["question"]
+    state = session.get("state_42006", {})
+
+    if question not in state:
+        state[question] = {"done": False, "comment": ""}
+
+    state[question]["done"] = not state[question]["done"]
+    session["state_42006"] = state
+    return redirect(url_for("iso42006"))
+
+
+@app.route("/comment42006", methods=["POST"])
+def comment42006():
+    question = request.form["question"]
+    comment = request.form["comment"]
+
+    state = session.get("state_42006", {})
+    if question not in state:
+        state[question] = {"done": False, "comment": ""}
+
+    state[question]["comment"] = comment
+    session["state_42006"] = state
+    return redirect(url_for("iso42006"))
 
 @app.route("/toggle22989", methods=["POST"])
 def toggle22989():
@@ -802,6 +876,7 @@ def dashboard():
     iso23894_state = session.get("state_23894", {})
     iso38507_state = session.get("state_38507", {})
     iso22989_state = session.get("state_22989", {})
+    iso42006_state = session.get("state_42006", {})
 
     def calculate_stats(state, menu):
         total = sum(len(v) for v in menu.values())
@@ -819,6 +894,7 @@ def dashboard():
     iso23894_stats = calculate_stats(iso23894_state, ISO_23894_MENU)
     iso38507_stats = calculate_stats(iso38507_state, ISO_38507_MENU)
     iso22989_stats = calculate_stats(iso22989_state, ISO_22989_MENU)
+    iso42006_stats = calculate_stats(iso42006_state, ISO_42006_MENU)
 
     return render_template(
         "dashboard.html",
@@ -827,6 +903,7 @@ def dashboard():
         iso23894=iso23894_stats,
         iso38507=iso38507_stats,
         iso22989=iso22989_stats,
+        iso42006=iso42006_stats,
         username=session["username"]
     )
 

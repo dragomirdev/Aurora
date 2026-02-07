@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Aurora – ISO 38507:2022</title>
+    <title>Aurora – ISO 42006:2023</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <header class="app-header">
     <h1 class="app-title">Aurora</h1>
-    <p class="app-subtitle">ISO 38507:2022 – Governance of AI</p>
+    <p class="app-subtitle">ISO 42006:2023 – AI Compliance Guidance</p>
 </header>
 
 <nav class="top-nav">
@@ -16,9 +16,9 @@
     <a href="/iso9001">ISO 9001</a>
     <a href="/iso42001">ISO 42001</a>
     <a href="/iso23894">ISO 23894</a>
-    <a href="/iso38507" class="active">ISO 38507</a>
+    <a href="/iso38507">ISO 38507</a>
     <a href="/iso22989">ISO 22989</a>
-    <a href="/iso42006">ISO 42006</a>
+    <a href="/iso42006" class="active">ISO 42006</a>
 </nav>
 
 {% for section, questions in menu.items() %}
@@ -30,7 +30,7 @@
 
     <div class="question {{ 'done' if qstate.done else 'todo' }}">
 
-        <form method="POST" action="{{ url_for('toggle38507') }}">
+        <form method="POST" action="{{ url_for('toggle42006') }}">
             <input type="hidden" name="question" value="{{ q }}">
             <button class="toggle-btn" type="submit">
                 {{ '✔' if qstate.done else '✖' }}
@@ -38,9 +38,9 @@
             <span class="question-text">{{ q }}</span>
         </form>
 
-        <form method="POST" action="{{ url_for('comment38507') }}">
+        <form method="POST" action="{{ url_for('comment42006') }}">
             <input type="hidden" name="question" value="{{ q }}">
-            <textarea name="comment" placeholder="AI governance comments...">{{ qstate.comment }}</textarea>
+            <textarea name="comment" placeholder="AI compliance comments...">{{ qstate.comment }}</textarea>
             <button class="save-btn" type="submit">Save comment</button>
         </form>
 

@@ -8,7 +8,7 @@
 
 <header class="app-header">
     <h1 class="app-title">Aurora</h1>
-    <p class="app-subtitle">Audit Dashboard – ISO 9001, ISO 42001, ISO 23894, ISO 38507, ISO 22989</p>
+    <p class="app-subtitle">Audit Dashboard – ISO 9001, ISO 42001, ISO 23894, ISO 38507, ISO 22989, ISO 42006</p>
 </header>
 
 <div class="user-bar">
@@ -95,6 +95,21 @@
         </div>
 
         <a href="/iso22989" class="card-link">Open ISO 22989 Checklist</a>
+    </div>
+
+    <div class="card">
+        <h2>ISO 42006</h2>
+        <p><strong>Total questions:</strong> {{ iso42006.total }}</p>
+        <p class="green"><strong>Completed:</strong> {{ iso42006.completed }}</p>
+        <p class="red"><strong>Open:</strong> {{ iso42006.open }}</p>
+
+        <div class="progress">
+            <div class="progress-bar" style="width: {{ iso42006.percent }}%">
+                {{ iso42006.percent }}%
+            </div>
+        </div>
+
+        <a href="/iso42006" class="card-link">Open ISO 42006 Checklist</a>
     </div>
 
 </div>
